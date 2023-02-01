@@ -7,6 +7,7 @@ const btnSubmit = document.querySelector('.btn')
 const form = document.getElementById('form');
 const small = document.querySelector('small');
 const phone = document.getElementById('phone');
+const label = document.querySelector('label');
 
 
 // Functions
@@ -33,44 +34,45 @@ function checkEmail(email) {
     );
 }
 
+// Check required fields
+function checkRequired(input, message) {
+    if (input.value.trim() === '') {
+        showError(input, message);
+    } else {
+        showSuccess(input);
+    }
+};
+
+
+// Check length
+function checkLength(input, min, max) {
+
+    if (input.value.length < 8) {
+        showError(input, `Minimum ${min} characters`);
+    } else if (input.value.length > 15) {
+        showError(input, `Maximum ${max} characters` );
+    } else
+    showSuccess(input);
+}
+
+function checkPassword(input1, input2) {
+    if (input1.value !== input2.value) {
+        showError(input2, 'Passwords must match')
+    } else {
+        showSuccess(input2);
+    }
+}
+
 // Event listeners
 btnSubmit.addEventListener('click', function(e) {
 
-    if (firstName.value == '') {
-        showError(firstName, 'Username is required')
-    } else {
-        showSuccess(firstName);
-    }
-
-    if (email.value == '') {
-        showError(email, 'Email is required')
-    } else if(!checkEmail(email.value)) {
-        showError(email, 'Email is not valid')
-    } else {
-        showSuccess(email);
-    }
-
-    if (lastName.value == '') {
-        showError(lastName, 'Last Name is required')
-    } else {
-        showSuccess(lastName);
-    }
-
-    if (password.value == '') {
-        showError(password, 'Password is required')
-    } else {
-        showSuccess(password);
-    }
-
-    if (password2.value == '') {
-        showError(password2, 'Password is required')
-    } else {
-        showSuccess(password2);
-    }
-
-    if (phone.value == '') {
-        showError(phone, 'Phone is required')
-    } else {
-        showSuccess(phone);
-    }
+    checkRequired(firstName, 'First name is required')
+    checkRequired(lastName, 'Last name is required')
+    checkRequired(email, 'Email is required')
+    checkRequired(phone, 'Phone is required')
+    checkRequired(password, 'Password is required')
+    checkRequired(password2, 'Password Confirmation is required')
+    
+    checkLength(password, 8, 15);
+    checkPassword(password, password2);
 });
