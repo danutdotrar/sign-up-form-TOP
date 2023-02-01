@@ -56,7 +56,7 @@ input {
     border-radius: 5px;
     border: 1px solid rgb(82, 82, 82);
     /* outline: none; */
-    margin-bottom: 16px;
+    margin-bottom: 1px;
     
     /* -webkit-box-shadow: 0px 2px 17px -6px rgba(0,0,0,0.75);
     -moz-box-shadow: 0px 2px 17px -6px rgba(0,0,0,0.75);
@@ -81,6 +81,22 @@ form {
     /* top: 25%; */
 }
 
+.form-control {
+    margin-bottom: 16px;
+}
+
+.form-control.error input {
+    border-color: red;
+}
+
+.form-control small {
+    color: red;
+    visibility: hidden;
+}
+
+.form-control.error small {
+    visibility: visible;
+}
 
 .footer {
     padding: 40px;
@@ -122,4 +138,8 @@ a {
 
 p {
     margin-top: 30px;
+}
+
+#password2 {
+    margin-bottom: 0;
 }
