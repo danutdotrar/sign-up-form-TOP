@@ -98,6 +98,10 @@ form {
     visibility: visible;
 }
 
+.form-control.success input {
+    border-color: rgb(108, 173, 108);
+}
+
 .footer {
     padding: 40px;
 }
