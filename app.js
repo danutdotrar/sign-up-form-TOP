@@ -15,6 +15,7 @@ const label = document.querySelector('label');
 function showError(input, message) {
     const formControl = input.parentElement;
     formControl.className = 'form-control error';
+
     const small = formControl.querySelector('small');
     small.innerText = message;
 }
@@ -26,12 +27,14 @@ function showSuccess(input) {
 }
 
 // Check email
-function checkEmail(email) {
-    return String(email)
-    .toLowerCase()
-    .match(
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    );
+function checkEmail(input) {
+    const re = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/;
+
+    if (re.test(input.value)) {
+        showSuccess(input);
+    } else {
+        showError(input, `Enter a valid email`);
+    }
 }
 
 // Check required fields
@@ -58,7 +61,7 @@ function checkLength(input, min, max) {
 function checkPassword(input1, input2) {
     if (input1.value !== input2.value) {
         showError(input2, 'Passwords must match')
-    } else {
+    } else if (input1.value == input2.value && input2.value !== '') {
         showSuccess(input2);
     }
 }
@@ -73,6 +76,7 @@ btnSubmit.addEventListener('click', function(e) {
     checkRequired(password, 'Password is required')
     checkRequired(password2, 'Password Confirmation is required')
     
+    checkEmail(email);
     checkLength(password, 8, 15);
     checkPassword(password, password2);
 });
