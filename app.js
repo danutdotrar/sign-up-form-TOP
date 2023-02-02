@@ -74,7 +74,7 @@ btnSubmit.addEventListener('click', function(e) {
     checkRequired(email, 'Email is required')
     checkRequired(phone, 'Phone is required')
     checkRequired(password, 'Password is required')
-    checkRequired(password2, 'Password Confirmation is required')
+    checkRequired(password2, 'Password confirmation is required')
     
     checkEmail(email);
     checkLength(password, 8, 15);
